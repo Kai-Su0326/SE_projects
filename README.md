@@ -26,5 +26,6 @@ boolean absNonNeg(@IntRange(min=-10, max=10) Integer i) {
 Then, quickCheckClass() would call absNonNeg with many different input integers ranging from -10 to 10, inclusive. For the first one for which absNonNeg returns false, quickCheckClass would add a mapping from the method name ("absNonNeg") to the array of arguments for which the method returned false or threw a Throwable. Otherwise, if the property runs until termination with only true return values, the "absNonNeg" would be mapped to null. Then quickCheckClass will run the next property in the class.
 <br>
 <br>
-Except the arguments of Int, quickCheckClass also checks annotated arguments of String(@StringSet) and List(@ListLength). The most difficult part was handling the list of list part and I used recursive helper to give all of the permutaions.
+Except the arguments of Int, quickCheckClass also checks annotated arguments of String(@StringSet) and List(@ListLength). 
+List arguments would be annotated with @ListLength(min=i1, max=i2), indicating the minimum and maximum (inclusive) list lengths for the argument. The tricky part was handling the list of list part(eg:<code> @ListLength(min=0, max=2) List<@ListLength(min=0,max=3) List<@IntRange(min=5, max=7) Integer>></code>) and I used recursive helper to give all of the permutaions.
 For Object arguments annotated with @ForAll(name="method", times=i), the method with the name in property's class would be called to genrate i values for the argument.
