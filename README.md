@@ -29,6 +29,7 @@ Then, quickCheckClass() would call absNonNeg with many different input integers 
 Except the arguments of Int, quickCheckClass also checks annotated arguments of String(@StringSet) and List(@ListLength). 
 List arguments would be annotated with @ListLength(min=i1, max=i2), indicating the minimum and maximum (inclusive) list lengths for the argument. The tricky part was handling the list of list part(eg:<code> @ListLength(min=0, max=2) List<@ListLength(min=0,max=3) List<@IntRange(min=5, max=7) Integer>></code>) and I used recursive helper to give all of the permutaions.
 For Object arguments annotated with @ForAll(name="method", times=i), the method with the name in property's class would be called to genrate i values for the argument.
+
 ## Chess Game
 This project is a good practice of multiple Java design patterns.
 ### Design Patterns
